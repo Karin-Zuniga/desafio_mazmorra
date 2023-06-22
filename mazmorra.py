@@ -5,11 +5,22 @@
 #F(x) 1 = historia
 
 
-def habitacion_1_a(final):
-    pass    
+
+
+def puertas(numero_puertas):
+    if numero_puertas > 2:
+        norte = "3. Norte\n"
+        direccion = " al norte,"
+    else:
+        norte = ""
+        direccion = ""
+    puerta = input(f"Tienes {numero_puertas} puertas que dan{direccion} al este, y al oeste.\nHacia cual correras?\n1. Este\n2. Oeste\n{norte}")
+    return puerta 
 
 def habitacion_1_a(final):
-    pass
+    print("Te encuentras en una habitacion con muros de piedra.")
+    puertas(2)
+    
 
 def habitacion_1_b(final):
     pass
@@ -87,7 +98,7 @@ def habitacion_3_h(final):
 def historia():
     final = False
     while final == False:
-        puerta_primer_piso = input("Alrededor tuyo hay 4 puertas. \n Que puerta elijiras?\n1. Puerta Sur\n2. Puerta Norte\n3. Puerta Este\n4. Puerta Oeste\n")
+        puerta_primer_piso = str(input("Alrededor tuyo hay 4 puertas. \n Que puerta eligiras?\n1. Puerta Sur\n2. Puerta Norte\n3. Puerta Este\n4. Puerta Oeste\n"))
         if puerta_primer_piso == "1":
             habitacion_1_a(final)
         elif puerta_primer_piso == "2":
@@ -96,11 +107,12 @@ def historia():
             habitacion_1_c(final)
         elif puerta_primer_piso == "4":
             habitacion_1_d(final)
-        elif puerta_primer_piso.lower(final) == "salir":
+        elif puerta_primer_piso.lower() == "salir":
             print("adios")
             final = True
         else:
             print("opcion no valida. Para salir ingresa 'salir'")
+
 
 
 
