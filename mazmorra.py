@@ -67,10 +67,17 @@ def habitacion_3_g(final):
 
 def habitacion_3_h(final):
     troll = int(input("Tropiezas y caes al suelo, al levantar la cabeza 30 grados, ves que hay un troll de dos metros frente a ti. Calcula la distancia a la cual esta el troll, para saber si alcanzas a huir."))
-    if troll > 4
-        #nope
-    elif troll > 3 and troll < 4
+    if troll > 4:
+        print("Oh no, haz sobreestimado la distancia. El troll corre hacia ti y te alcanza.\nMejor suerte la proxima vez ")
+        final = True
+    elif troll > 3 and troll < 4:
      #correcto
+        pass
+
+    elif troll < 3:
+        print("Oh no, haz subestimado la distancia y perdiste tu oportunidad de escapar. De haber corrido mas lejos, podrias haber cruzado la puerta siguiente. Lo siento, haz perdido.")
+
+
     elif troll.lower() == "salir":
         print("adios")
         final = True
