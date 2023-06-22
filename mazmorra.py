@@ -4,7 +4,14 @@
 #var_3 = nivel ==> 3 niveles
 #F(x) 1 = historia
 import random
-
+def tirar_piedras(cantidad):
+    for i in range(0,11):
+        piedras_derecha = random.randint (0,cantidad)
+        piedras_izquierda = random.randint (0,cantidad)
+        piedras = int(input(f"Por la derecha vienen {piedras_derecha} y por la izquierda {piedras_izquierda}\nCuantas vienen?\n"))
+        piedras_totales = piedras_derecha + piedras_izquierda    
+        if piedras != piedras_totales:
+            break
 
 
 
@@ -23,18 +30,13 @@ def habitacion_1_a(nivel):
     puerta = puertas(2)
     print("Corres lo mas rapido que puedes pero en mitad del camino pisas una trampa y una maquina en cada lado de la habitacion empieza a tirar piedras hacia ti. Mejor las cuentas las piedras para asegurarte que las esquivaste todas.")
     if nivel == "1":
-        for i in range(0,11):
-            piedras_derecha = random.randint (0,50)
-            piedras_izquierda = random.randint (0,50)
-            piedras = int(input(f"Por la derecha vienen {piedras_derecha} y por la izquierda {piedras_izquierda}\nCuantas vienen?\n"))
-            piedras_totales = piedras_derecha + piedras_izquierda
-            if piedras != piedras_totales:
-                break
+        tirar_piedras(10)
+            
 
     elif nivel == "2":
-        pass
+        tirar_piedras(50)
     elif nivel == "3":
-        pass
+        tirar_piedras(150)
     else:
         print("Algo no funciono")
     
