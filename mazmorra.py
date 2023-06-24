@@ -7,17 +7,17 @@
 import time
 import random
 
-def historia(nivel):
+def historia(nivel,final):
 
     puerta_primer_piso = str(input("Alrededor tuyo hay 4 puertas. \n Que puerta eligiras?\n1. Puerta Sur\n2. Puerta Norte\n3. Puerta Este\n4. Puerta Oeste\n"))
     if puerta_primer_piso == "1":
         habitacion_1_a(nivel)
     elif puerta_primer_piso == "2":
-        habitacion_1_b(final)
+        habitacion_1_b(nivel)
     elif puerta_primer_piso == "3":
-        habitacion_1_c(final)
+        habitacion_1_c(nivel)
     elif puerta_primer_piso == "4":
-        habitacion_1_d(final)
+        habitacion_1_d(nivel)
     elif puerta_primer_piso.lower() == "salir":
         print("adios")
         final = True
@@ -163,7 +163,7 @@ def main():
         time.sleep(2)
         print("Caminas por un bosque en medio de la noche. De repente, tus pies pisan una puerta. Por curiosidad, la abres y ves una escalera colgante, por lo que decides ir a investigar...\n...bajas lo que parecen ser tres pisos, y tan pronto como tus pies tocan el suelo, la puerta se cierra y la escalera cae.\n ...Parece ser que estas en un grave problema...")
     while final == False:
-        historia(nivel)
+        historia(nivel, final)
         
     else:
         print("Opcion no valida. Adios")
