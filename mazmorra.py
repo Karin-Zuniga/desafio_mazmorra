@@ -18,9 +18,11 @@ def historia(nivel,final):
         habitacion_1_c(nivel)
     elif puerta_primer_piso == "4":
         habitacion_1_d(nivel)
+        print("Hola mundo")
     elif puerta_primer_piso.lower() == "salir":
         print("adios")
         final = True
+        return final
     else:
         print("opcion no valida. Para salir ingresa 'salir'")
 
@@ -163,7 +165,7 @@ def main():
         time.sleep(2)
         print("Caminas por un bosque en medio de la noche. De repente, tus pies pisan una puerta. Por curiosidad, la abres y ves una escalera colgante, por lo que decides ir a investigar...\n...bajas lo que parecen ser tres pisos, y tan pronto como tus pies tocan el suelo, la puerta se cierra y la escalera cae.\n ...Parece ser que estas en un grave problema...")
     while final == False:
-        historia(nivel, final)
+        final = historia(nivel, final)
         
     else:
         print("Opcion no valida. Adios")
