@@ -25,7 +25,7 @@ def primera_pregunta(nivel, diario, msg_diario):
         final = transformar_a_numero(respuesta)
         
         if final == True and isinstance(final, str) == True:
-            return final
+            return final,diario
         elif final != 1 and isinstance(final, str) == False:
             print(advertencia)
         
@@ -53,7 +53,9 @@ def primera_pregunta(nivel, diario, msg_diario):
         valor = input(msg_diario)
         if valor.lower() == "si":
             print(diario)
-
+    final = False
+            
+    return final, diario
 
 
 
@@ -85,8 +87,21 @@ def main():
         time.sleep(0.5)
         while final == False:
             print(inicio)
-            final = primera_pregunta(nivel, diario, msg_diario)
+            final, diario = primera_pregunta(nivel, diario, msg_diario)
+            
             print("Gracias por jugar")
+
+
+
+
+
+            respuesta = input("Deseas otra partida?(si/no)")
+            if respuesta == "no":
+                final = True
+            else:
+                final = False
+
+
 
 
        
