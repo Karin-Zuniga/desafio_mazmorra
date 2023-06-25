@@ -6,14 +6,24 @@ def primera_pregunta(nivel):
     advertencia = "Vas por mal camino, sigue asi y te quedaras dentro."
     felicidades = "Sigue asi y puede que logres salir"
 
-    respuesta = input("Cual es el resultado del seno(30)+cos(60)?\n")
 
-    while valor_respuesta = False:
+    while valor_respuesta == False:
+        respuesta = input("Cual es el resultado del seno(30)+cos(60)?\n")
+        try:
+            respuesta = int(respuesta)
+        except ValueError:
+            salir = input("valor no valido, deseas salir(si/no)")
+            if salir == "si":
+                final = True
+                return final
+           
         if respuesta != 1:
             print(advertencia)
+        
         else:
             print(felicidades)
             valor_respuesta = True
+
 
 
 
@@ -41,7 +51,8 @@ def main():
         time.sleep(0.5)
         while final == False:
             print(inicio)
-            primera_pregunta()
+            final = primera_pregunta(nivel)
+            print("Gracias por jugar")
 
 
        
