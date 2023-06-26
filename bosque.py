@@ -79,6 +79,7 @@ def main():
     
     print(f"Hola {jugador}")
     
+    
     time.sleep(1)
     
     nivel = input("En que nivel deseas jugar(Ingresa el numero con tu alternativa.)\n1.Facil\n2. Medio\n3. Dificil\n")
