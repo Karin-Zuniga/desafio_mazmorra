@@ -4,19 +4,27 @@ import random
 def definir_patron(nivel):
     patron = [] 
     patron_usuario = ""
-    if nivel == "1":
-        a = random.randint(1,25)
-        b = random.randint(1,25)
+    a = random.randint(1,25)
+    b = random.randint(1,25)
 
-        patron = [a, b]
-    for i in range(0,4):
-        if patron[-2] % patron[-1] == 0:
-            c = patron[-2] + patron[-1]
-        else:
+    patron = [a, b]
+
+    if nivel == "1":
+         for i in range(0,4):
             c = patron[-2] - patron[-1]
-        int(c)
-        patron.append(c)
-    
+        
+            int(c)
+            patron.append(c)
+    elif nivel == "2":
+
+        for i in range(0,4):
+            if patron[-2] % patron[-1] == 0:
+                c = patron[-2] + patron[-1]
+            else:
+                c = patron[-2] - patron[-1]
+            int(c)
+            patron.append(c)
+        
     print("************") 
     for numero in patron:
         numero = str(numero)
@@ -53,9 +61,55 @@ def agregar_a_diario(patron_usuario, diario, msg_diario):
 
 
 
-
-
 def primera_pregunta(nivel, diario, msg_diario):
+    advertencia = "No, me temo que no"
+    felicidades = "Buena suerte en la siguiente... la necesitaras"
+
+    while valor_respuesta == False:
+        msg_facil = "PASO  es a APSO como 3240 es a...?\n"
+        msg_dificil ="\n"
+        
+        if nivel == "1":
+            respuesta = input(msg_facil)
+        elif nivel == "2":    
+            respuesta = input(msg_dificil)
+
+        
+        final = transformar_a_numero(respuesta)
+        
+        if final == True:
+            
+            return final,diario
+
+        elif nivel == "1" and final != 2340 and isinstance(final, float) == True:
+            
+            print(advertencia)
+            
+        elif nivel == "1" and final == 2340 and isinstance(final, float) == True:
+            print(felicidades)
+            valor_respuesta = True
+
+
+        elif final != 1 and isinstance(final, float) == True and nivel == "2":
+            print(advertencia)
+        
+        elif final == 1 and nivel == "2" and isinstance(final, float) == True:
+            print(felicidades)
+            valor_respuesta = True
+
+        else:
+            print("algo salio mal")
+
+    patron_usuario = definir_patron(nivel)
+    
+    diario = agregar_a_diario(patron_usuario, diario, msg_diario)
+    
+    final = False
+
+    return final, diario
+
+
+def segunda_pregunta(nivel, diario, msg_diario):
     valor_respuesta = False
     
 
@@ -110,9 +164,10 @@ def primera_pregunta(nivel, diario, msg_diario):
 
 
 
+
 def main():
     nombre_juego = "Escape del bosque"
-    inicio = "Estas atrapado dentro del bosque. Para salir deberas resolver 6 acertijos matematicos. Al final de cada ejercicio se te dara un numero. Encuentra el patron para salir o si no, te quedaras atrapado en un bucle para siempre, suerte :)\n" 
+    inicio = "Estas atrapado dentro del bosque. Para salir deberas resolver 6 acertijos matematicos. Al final de cada ejercicio se te dara un conjunto de numeros. Encuentra la regla del patron para abrir la puerta final, o sino, te quedaras atrapado en un bucle para siempre, suerte :)\n" 
     msg_diario = "Deseas revisar tu diario?\n"
 
     final = False
