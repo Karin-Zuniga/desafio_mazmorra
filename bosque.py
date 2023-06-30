@@ -62,6 +62,7 @@ def agregar_a_diario(patron_usuario, diario, msg_diario):
 
 
 def primera_pregunta(nivel, diario, msg_diario):
+    valor_respuesta = False
     advertencia = "No, me temo que no"
     felicidades = "Buena suerte en la siguiente... la necesitaras"
 
