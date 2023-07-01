@@ -24,7 +24,7 @@ def definir_patron(nivel):
                 c = patron[-2] - patron[-1]
             int(c)
             patron.append(c)
-        
+                    
     print("************") 
     for numero in patron:
         numero = str(numero)
@@ -68,7 +68,7 @@ def primera_pregunta(nivel, diario, msg_diario):
 
     while valor_respuesta == False:
         msg_facil = "PASO  es a APSO como 3240 es a...?\n"
-        msg_dificil ="\n"
+        msg_dificil ="Cual...\n"
         
         if nivel == "1":
             respuesta = input(msg_facil)
@@ -91,18 +91,17 @@ def primera_pregunta(nivel, diario, msg_diario):
             valor_respuesta = True
 
 
-        elif final != 1 and isinstance(final, float) == True and nivel == "2":
+        elif  nivel == "2" and final != 1 and isinstance(final, float) == True:
             print(advertencia)
         
-        elif final == 1 and nivel == "2" and isinstance(final, float) == True:
+        elif nivel == "2" and final == 1 and isinstance(final, float) == True:
             print(felicidades)
             valor_respuesta = True
+        
 
-        else:
-            print("algo salio mal")
 
     patron_usuario = definir_patron(nivel)
-    
+   
     diario = agregar_a_diario(patron_usuario, diario, msg_diario)
     
     final = False
@@ -193,6 +192,7 @@ def main():
         while final == False:
             print(inicio)
             final, diario = primera_pregunta(nivel, diario, msg_diario)
+            final, diario = segunda_pregunta(nivel, diario, msg_diario)
             
             print("Gracias por jugar")
 
