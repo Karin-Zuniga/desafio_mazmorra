@@ -10,14 +10,14 @@ def definir_patron(nivel):
     patron = [a, b]
 
     if nivel == "1":
-         for i in range(0,4):
+         for i in range(0,6):
             c = patron[-2] - patron[-1]
         
             int(c)
             patron.append(c)
     elif nivel == "2":
 
-        for i in range(0,4):
+        for i in range(0,6):
             if patron[-2] % patron[-1] == 0:
                 c = patron[-2] + patron[-1]
             else:
@@ -35,10 +35,9 @@ def definir_patron(nivel):
     
     return patron_usuario
 
-
 def transformar_a_numero(respuesta):
+
     if respuesta == "salir":
-        print("************************")
         final = True
         return final
     else:
@@ -57,10 +56,6 @@ def agregar_a_diario(patron_usuario, diario, msg_diario):
         if valor.lower() == "si":
             return diario
     
-
-
-
-
 def primera_pregunta(nivel, diario, msg_diario):
     valor_respuesta = False
     advertencia = "No, me temo que no"
@@ -91,15 +86,13 @@ def primera_pregunta(nivel, diario, msg_diario):
             valor_respuesta = True
 
 
-        elif  nivel == "2" and final != 1 and isinstance(final, float) == True:
+        elif nivel == "2" and final != 1 and isinstance(final, float) == True:
             print(advertencia)
         
         elif nivel == "2" and final == 1 and isinstance(final, float) == True:
             print(felicidades)
             valor_respuesta = True
-        
-
-
+            
     patron_usuario = definir_patron(nivel)
    
     diario = agregar_a_diario(patron_usuario, diario, msg_diario)
@@ -111,8 +104,6 @@ def primera_pregunta(nivel, diario, msg_diario):
 
 def segunda_pregunta(nivel, diario, msg_diario):
     valor_respuesta = False
-    
-
     advertencia = "Vas por mal camino, sigue asi y te quedaras dentro.\n"
     felicidades = "Sigue asi y puede que logres salir\n"
 
@@ -127,7 +118,7 @@ def segunda_pregunta(nivel, diario, msg_diario):
 
         
         final = transformar_a_numero(respuesta)
-        
+                
         if final == True:
             
             return final,diario
@@ -158,6 +149,11 @@ def segunda_pregunta(nivel, diario, msg_diario):
     final = False
 
     return final, diario
+    
+
+
+
+        
 
 
 
@@ -166,6 +162,10 @@ def segunda_pregunta(nivel, diario, msg_diario):
 
 
 def main():
+
+
+
+
     nombre_juego = "Escape del bosque"
     inicio = "Estas atrapado dentro del bosque. Para salir deberas resolver 6 acertijos matematicos. Al final de cada ejercicio se te dara un conjunto de numeros. Encuentra la regla del patron para abrir la puerta final, o sino, te quedaras atrapado en un bucle para siempre, suerte :)\n" 
     msg_diario = "Deseas revisar tu diario?\n"
