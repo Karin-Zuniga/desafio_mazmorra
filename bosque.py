@@ -47,23 +47,34 @@ def transformar_a_numero(respuesta):
         except ValueError:       
             print("valor no valido")
 
-def agregar_a_diario(patron_usuario, diario, msg_diario):
-    valor = input(f"Deseas agregar {patron_usuario} a tu diario (si/no)?\n")
-    valor = valor.lower()
-    if valor == "si":
-        diario += [patron_usuario]
-        valor = input(msg_diario)
-        if valor.lower() == "si":
+def agregar_a_diario(patron_usuario, diario):
+    msg_diario = "Deseas revisar tu diario?\n"
+    terminar = False
+    while terminar == False:
+        valor = input(f"Deseas agregar {patron_usuario} a tu diario (si/no)?\n")
+        valor = valor.lower()
+        if valor == "si":
+            diario += [patron_usuario]
+            valor = input(msg_diario)
+            if valor.lower() == "si":
+                print(diario)
+                return diario
+            elif valor.lower() == "no":
+                return diario
+            else:
+                continue
+        elif valor == "no":
             return diario
     
-def primera_pregunta(nivel, diario, msg_diario):
+def primera_pregunta(nivel, diario):
+    
     valor_respuesta = False
     advertencia = "No, me temo que no"
     felicidades = "Buena suerte en la siguiente... la necesitaras"
 
     while valor_respuesta == False:
         msg_facil = "PASO  es a APSO como 3240 es a...?\n"
-        msg_dificil ="Cual...\n"
+        msg_dificil ="Cuanto es 10 + 10\n"
         
         if nivel == "1":
             respuesta = input(msg_facil)
@@ -85,24 +96,23 @@ def primera_pregunta(nivel, diario, msg_diario):
             print(felicidades)
             valor_respuesta = True
 
-
-        elif nivel == "2" and final != 1 and isinstance(final, float) == True:
-            print(advertencia)
-        
-        elif nivel == "2" and final == 1 and isinstance(final, float) == True:
+        elif nivel == "2" and final == 20 and isinstance(final, float) == True:
             print(felicidades)
             valor_respuesta = True
+
+        elif nivel == "2" and final != 20 and isinstance(final, float) == True:
+            print(advertencia)
+        
             
     patron_usuario = definir_patron(nivel)
    
-    diario = agregar_a_diario(patron_usuario, diario, msg_diario)
+    diario = agregar_a_diario(patron_usuario, diario)
     
     final = False
 
     return final, diario
 
-
-def segunda_pregunta(nivel, diario, msg_diario):
+def segunda_pregunta(nivel, diario):
     valor_respuesta = False
     advertencia = "Vas por mal camino, sigue asi y te quedaras dentro.\n"
     felicidades = "Sigue asi y puede que logres salir\n"
@@ -144,14 +154,26 @@ def segunda_pregunta(nivel, diario, msg_diario):
 
     patron_usuario = definir_patron(nivel)
     
-    diario = agregar_a_diario(patron_usuario, diario, msg_diario)
+    diario = agregar_a_diario(patron_usuario, diario)
     
     final = False
 
     return final, diario
+
+def tercera_pregunta(nivel, diario):
+    pass
     
+def cuarta_pregunta(nivel, diario):
+    pass
 
+def quinta_pregunta(nivel, diario):
+    pass
 
+def sexta_pregunta(nivel, diario):
+    pass
+
+def puerta_final(nivel, diario):
+    pass
 
         
 
@@ -168,7 +190,7 @@ def main():
 
     nombre_juego = "Escape del bosque"
     inicio = "Estas atrapado dentro del bosque. Para salir deberas resolver 6 acertijos matematicos. Al final de cada ejercicio se te dara un conjunto de numeros. Encuentra la regla del patron para abrir la puerta final, o sino, te quedaras atrapado en un bucle para siempre, suerte :)\n" 
-    msg_diario = "Deseas revisar tu diario?\n"
+   
 
     final = False
     diario = []
@@ -183,28 +205,45 @@ def main():
     print(f"Hola {jugador}")
     
 
-    time.sleep(1)
+    time.sleep(0.5)
     
-    nivel = input("En que nivel deseas jugar(Ingresa el numero con tu alternativa.)\n1. Facil\n2. Dificil\n")
-    
-    if nivel == "1" or nivel == "2":
-        time.sleep(0.5)
-        while final == False:
+    while final == False:
+        nivel = input("En que nivel deseas jugar(Ingresa el numero con tu alternativa.)\n1. Facil\n2. Dificil\n")
+        
+        time.sleep(1)
+        if nivel == "1" or nivel == "2":
             print(inicio)
-            final, diario = primera_pregunta(nivel, diario, msg_diario)
-            final, diario = segunda_pregunta(nivel, diario, msg_diario)
-            
+            final, diario = primera_pregunta(nivel, diario)
+            if final == True:
+                break
+            final, diario = segunda_pregunta(nivel, diario)
+            if final == True:
+                break
+            # final, diario = tercera_pregunta(nivel, diario)
+            # if final == True:
+            #     break
+            # final, diario = cuarta_pregunta(nivel, diario)
+            # if final == True:
+            #     break
+            # final, diario = quinta_pregunta(nivel, diario)
+            # if final == True:
+            #     break
+            # final, diario = sexta_pregunta(nivel, diario)
+            # if final == True:
+            #     break
+
             print("Gracias por jugar")
-
-
-
-
 
             respuesta = input("Deseas otra partida?(si/no)")
             if respuesta == "no":
                 final = True
             else:
                 final = False
+
+        else:
+            print("valor no valido")    
+        
+        
 
 
 
