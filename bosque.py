@@ -207,41 +207,38 @@ def tercera_pregunta(nivel, diario):
     final = False
 
     return final, diario
-#______________________Aqui vamos con las preguntas_____________________________#  
 def cuarta_pregunta(nivel, diario):
     valor_respuesta = False
     advertencia = "De hecho, eso no es correcto."
-    felicidades = "Debo reconocer que lo hiciste decentemente hasta aqui."
+    felicidades = "Debo reconocer que lo haz hecho decentemente hasta aqui."
 
     while valor_respuesta == False:
-        msg_facil = "Si tengo 22 años, en 27 años tendre 49. Si pasan 16 años mas,tendre 55. En cuantos años tendre 60?\n"
-        msg_dificil ="Cuanto es 10 + 10\n"
+        msg_facil = "Tienes tres cajas de frutas. Naranjas, Manzanas y Mezcla. Las tres incorrectamente etiquetadas y solo puedes tomar una fruta de una de las cajas para etiquetarlas correctamente. Que caja escojerias?\n"
+        msg_dificil ="\n"
         
         if nivel == "1":
             respuesta = input(msg_facil)
         elif nivel == "2":    
             respuesta = input(msg_dificil)
-
-        
-        final = transformar_a_numero(respuesta, advertencia)
-        
-        if final == True:
+                 
+        if respuesta == "salir":
             
             return final,diario
 
-        elif nivel == "1" and final != 38 and isinstance(final, float) == True:
+        elif nivel == "1" and respuesta.lower() != "mezcla" and isinstance(final, float) == True:
             
             print(advertencia)
             
-        elif nivel == "1" and final == 38 and isinstance(final, float) == True:
+        elif nivel == "1" and respuesta.lower() == "mezcla" and isinstance(final, float) == True:
+            print(felicidades)
+            valor_respuesta = True
+#______________________Aqui vamos con las preguntas_____________________________#  
+
+        elif nivel == "2" and respuesta.lower() == 38 and isinstance(final, float) == True:
             print(felicidades)
             valor_respuesta = True
 
-        elif nivel == "2" and final == 38 and isinstance(final, float) == True:
-            print(felicidades)
-            valor_respuesta = True
-
-        elif nivel == "2" and final != 38 and isinstance(final, float) == True:
+        elif nivel == "2" and respuesta.lower() != 38 and isinstance(final, float) == True:
             print(advertencia)
         
             
@@ -299,7 +296,49 @@ def quinta_pregunta(nivel, diario):
     return final, diario
 
 def sexta_pregunta(nivel, diario):
-    pass
+    valor_respuesta = False
+    advertencia = "Piensalo bien."
+    felicidades = "Supongo que no puedo negar que mereces cierto reconocimiento. Felicidades."
+
+    while valor_respuesta == False:
+        msg_facil = "Si tengo 22 años, en 27 años tendre 49. Si pasan 16 años mas,tendre 55. En cuantos años tendre 60?\n"
+        msg_dificil ="Cuanto es 10 + 10\n"
+        
+        if nivel == "1":
+            respuesta = input(msg_facil)
+        elif nivel == "2":    
+            respuesta = input(msg_dificil)
+
+        
+        final = transformar_a_numero(respuesta, advertencia)
+        
+        if final == True:
+            
+            return final,diario
+
+        elif nivel == "1" and final != 38 and isinstance(final, float) == True:
+            
+            print(advertencia)
+            
+        elif nivel == "1" and final == 38 and isinstance(final, float) == True:
+            print(felicidades)
+            valor_respuesta = True
+
+        elif nivel == "2" and final == 38 and isinstance(final, float) == True:
+            print(felicidades)
+            valor_respuesta = True
+
+        elif nivel == "2" and final != 38 and isinstance(final, float) == True:
+            print(advertencia)
+        
+            
+    patron_usuario = definir_patron(nivel)
+   
+    diario = agregar_a_diario(patron_usuario, diario)
+    
+    final = False
+
+    return final, diario
 
 def puerta_final(nivel, diario):
     pass
