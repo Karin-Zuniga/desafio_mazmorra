@@ -51,21 +51,22 @@ def transformar_a_numero(respuesta, advertencia):
             print("valor no valido")
 
 def agregar_a_diario(patron_usuario, diario):
-    msg_diario = "Deseas revisar tu diario?\n"
+    msg_diario = "Deseas revisar tu diario(si/no)?\n"
     terminar = False
-    while terminar == False:
+    while terminar == False:   
         valor = input(f"Deseas agregar {patron_usuario} a tu diario (si/no)?\n")
         valor = valor.lower()
         if valor == "si":
             diario += [patron_usuario]
-            valor = input(msg_diario)
-            if valor.lower() == "si":
-                print(diario)
-                return diario
-            elif valor.lower() == "no":
-                return diario
-            else:
-                continue
+            while terminar == False:
+                valor = input(msg_diario)
+                if valor.lower() == "si":
+                    print(diario)
+                    return diario
+                elif valor.lower() == "no":
+                    return diario
+                else:
+                    continue
         elif valor == "no":
             return diario
     
@@ -207,6 +208,7 @@ def tercera_pregunta(nivel, diario):
     final = False
 
     return final, diario
+
 def cuarta_pregunta(nivel, diario):
     valor_respuesta = False
     advertencia = "De hecho, eso no es correcto."
@@ -256,7 +258,7 @@ def quinta_pregunta(nivel, diario):
     felicidades = "Lo haz hecho bien, supongo."
 
     while valor_respuesta == False:
-        msg_facil = "Si tengo 22 años, en 27 años tendre 49. Si pasan 16 años mas,tendre 55. En cuantos años tendre 60?\n"
+        msg_facil = "Un arbol crece de tal manera que dobla su altura todos los años. Cuando alcanza los 100 pies, el arbol tiene 38 años. Que edad tenia el arbol cuando media 50 pies? \n"
         msg_dificil ="Cuanto es 10 + 10\n"
         
         if nivel == "1":
@@ -271,11 +273,11 @@ def quinta_pregunta(nivel, diario):
             
             return final,diario
 
-        elif nivel == "1" and final != 38 and isinstance(final, float) == True:
+        elif nivel == "1" and final != 37 and isinstance(final, float) == True:
             
             print(advertencia)
             
-        elif nivel == "1" and final == 38 and isinstance(final, float) == True:
+        elif nivel == "1" and final == 37 and isinstance(final, float) == True:
             print(felicidades)
             valor_respuesta = True
 
@@ -301,7 +303,7 @@ def sexta_pregunta(nivel, diario):
     felicidades = "Supongo que no puedo negar que mereces cierto reconocimiento. Felicidades."
 
     while valor_respuesta == False:
-        msg_facil = "Si tengo 22 años, en 27 años tendre 49. Si pasan 16 años mas,tendre 55. En cuantos años tendre 60?\n"
+        msg_facil = "Seis maquinas pueden hacer 6 ruedas en seis minutos. Cuanto minutos les tomara a 30 maquinas hacer 30 ruedas?\n"
         msg_dificil ="Cuanto es 10 + 10\n"
         
         if nivel == "1":
@@ -316,11 +318,11 @@ def sexta_pregunta(nivel, diario):
             
             return final,diario
 
-        elif nivel == "1" and final != 38 and isinstance(final, float) == True:
+        elif nivel == "1" and final != 6 and isinstance(final, float) == True:
             
             print(advertencia)
             
-        elif nivel == "1" and final == 38 and isinstance(final, float) == True:
+        elif nivel == "1" and final == 6 and isinstance(final, float) == True:
             print(felicidades)
             valor_respuesta = True
 
@@ -387,9 +389,9 @@ def main():
             final, diario = segunda_pregunta(nivel, diario)
             if final == True:
                 break
-            # final, diario = tercera_pregunta(nivel, diario)
-            # if final == True:
-            #     break
+            final, diario = tercera_pregunta(nivel, diario)
+            if final == True:
+                break
             # final, diario = cuarta_pregunta(nivel, diario)
             # if final == True:
             #     break
