@@ -282,7 +282,7 @@ def quinta_pregunta(nivel, diario, puerta):
 
     while valor_respuesta == False:
         msg_facil = "Un arbol crece de tal manera que dobla su altura todos los años. Cuando alcanza los 100 pies, el arbol tiene 38 años. Que edad tenia el arbol cuando media 50 pies? \n"
-        msg_dificil ="En una carrera entre un conejo y un canguro, donde el conejo le lleva la delantera al canguro\n"
+        msg_dificil ="En una carrera entre un conejo y un canguro, el conejo le lleva la delantera al canguro por 200 m. Si un salto de canguro equivale a 15 saltos de conejo, y el conejo recorre 12 m por salto, cuantos saltos necesita el canguro para adelantar al conejo(asumiendo que ambos saltan al mismo tiempo)?\n"
         
         if nivel == "1":
             respuesta = input(msg_facil)
@@ -304,11 +304,11 @@ def quinta_pregunta(nivel, diario, puerta):
             print(felicidades)
             valor_respuesta = True
 
-        elif nivel == "2" and final == 38 and isinstance(final, float) == True:
+        elif nivel == "2" and final == 2 and isinstance(final, float) == True:
             print(felicidades)
             valor_respuesta = True
 
-        elif nivel == "2" and final != 38 and isinstance(final, float) == True:
+        elif nivel == "2" and final != 2 and isinstance(final, float) == True:
             print(advertencia)
         
             
