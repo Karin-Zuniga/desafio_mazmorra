@@ -1,39 +1,55 @@
 import time
 import random
 
-def definir_patron(nivel):
+def mostrar_patron(patron):
+    print("************")
+    patron_usuario = "" 
+    for numero in patron:
+        numero = str(numero)
+        print(numero, end=" ")
+        patron_usuario = patron_usuario + " " + numero
+    return patron_usuario
+    print("\n************") 
+
+def definir_patron(nivel, puerta):
     patron = [] 
-    patron_usuario = ""
+    
     a = random.randint(1,25)
     b = random.randint(1,25)
 
     patron = [a, b]
 
     if nivel == "1":
-         for i in range(0,4):
+         for i in range(0,2):
             c = patron[-2] - patron[-1]
-        
             int(c)
             patron.append(c)
     elif nivel == "2":
 
-        for i in range(0,4):
+        for i in range(0,3):
             if patron[-2] % patron[-1] == 0:
                 c = patron[-2] + patron[-1]
             else:
                 c = patron[-2] - patron[-1]
             int(c)
             patron.append(c)
-                    
-    print("************") 
-    for numero in patron:
-        numero = str(numero)
-        print(numero, end=" ")
-        patron_usuario = patron_usuario + " " + numero
-
-    print("\n************") 
     
-    return patron_usuario
+    if puerta == False:
+        patron_usuario = mostrar_patron(patron)
+        return patron_usuario
+
+    elif puerta == True:
+        for i in range(3,0,-1):
+            print(patron[0:2])
+            advertencia = "Lo siento, no es la respuesta que buscaba"
+            ingreso = input("Que numero sigue?\n")
+            ingreso = transformar_a_numero(ingreso, advertencia)
+            if ingreso == patron[2]:
+                print("Felicidades, lo lograste!")
+                break
+            else:
+                print(f"Lo siento, no es la respuesta que buscaba. Te quedan {i-1} intentos.")
+        print("Me temo haz perdido, mejor suerte para la proxima.")
 
 def transformar_a_numero(respuesta, advertencia):
 
@@ -51,26 +67,31 @@ def transformar_a_numero(respuesta, advertencia):
             print("valor no valido")
 
 def agregar_a_diario(patron_usuario, diario):
-    msg_diario = "Deseas revisar tu diario(si/no)?\n"
     terminar = False
     while terminar == False:   
         valor = input(f"Deseas agregar {patron_usuario} a tu diario (si/no)?\n")
         valor = valor.lower()
         if valor == "si":
             diario += [patron_usuario]
-            while terminar == False:
-                valor = input(msg_diario)
-                if valor.lower() == "si":
-                    print(diario)
-                    return diario
-                elif valor.lower() == "no":
-                    return diario
-                else:
-                    continue
+            mostrar_diario(diario)
+            return diario
         elif valor == "no":
             return diario
     
-def primera_pregunta(nivel, diario):
+def mostrar_diario(diario):
+    msg_diario = "Deseas revisar tu diario(si/no)?\n"
+    terminar = False
+    while terminar == False:
+        valor = input(msg_diario)
+        if valor.lower() == "si":
+            print(diario)
+            break
+        elif valor.lower() == "no":
+            break
+        else:
+            continue
+
+def primera_pregunta(nivel, diario, puerta):
     
     valor_respuesta = False
     advertencia = "No, me temo que no"
@@ -107,8 +128,8 @@ def primera_pregunta(nivel, diario):
         elif nivel == "2" and final != 3 and isinstance(final, float) == True:
             print(advertencia)
         
-            
-    patron_usuario = definir_patron(nivel)
+         
+    patron_usuario = definir_patron(nivel, puerta)
    
     diario = agregar_a_diario(patron_usuario, diario)
     
@@ -116,7 +137,7 @@ def primera_pregunta(nivel, diario):
 
     return final, diario
 
-def segunda_pregunta(nivel, diario):
+def segunda_pregunta(nivel, diario, puerta):
     valor_respuesta = False
     advertencia = "Vas por mal camino, sigue asi y te quedaras dentro.\n"
     felicidades = "Sigue asi y puede que logres salir\n"
@@ -156,7 +177,7 @@ def segunda_pregunta(nivel, diario):
         else:
             print("algo salio mal")
 
-    patron_usuario = definir_patron(nivel)
+    patron_usuario = definir_patron(nivel, puerta)
     
     diario = agregar_a_diario(patron_usuario, diario)
     
@@ -164,7 +185,7 @@ def segunda_pregunta(nivel, diario):
 
     return final, diario
 
-def tercera_pregunta(nivel, diario):
+def tercera_pregunta(nivel, diario, puerta):
     valor_respuesta = False
     advertencia = "Lamento decirlo, pero estas equivocado."
     felicidades = "Lo haz hecho bien, supongo."
@@ -201,7 +222,7 @@ def tercera_pregunta(nivel, diario):
             print(advertencia)
         
             
-    patron_usuario = definir_patron(nivel)
+    patron_usuario = definir_patron(nivel, puerta)
    
     diario = agregar_a_diario(patron_usuario, diario)
     
@@ -209,23 +230,25 @@ def tercera_pregunta(nivel, diario):
 
     return final, diario
 
-def cuarta_pregunta(nivel, diario):
+def cuarta_pregunta(nivel, diario, puerta):
     valor_respuesta = False
     advertencia = "De hecho, eso no es correcto."
     felicidades = "Debo reconocer que lo haz hecho decentemente hasta aqui."
 
     while valor_respuesta == False:
         msg_facil = "Tienes tres cajas de frutas. Naranjas, Manzanas y Mezcla. Las tres incorrectamente etiquetadas y solo puedes tomar una fruta de una de las cajas para etiquetarlas correctamente. Que caja escojerias?\n"
-        msg_dificil ="\n"
+        msg_dificil ="Sin un par de adultos se come un pollo entero en 10 minutos, cuantas personas harian falta para comer 10 pollos en 20 minutos.\n"
         
         if nivel == "1":
             respuesta = input(msg_facil)
         elif nivel == "2":    
             respuesta = input(msg_dificil)
-                 
         if respuesta == "salir":
             
             return final,diario
+
+        if isinstance(respuesta, float) == True:
+            final = transformar_a_numero(respuesta, advertencia)
 
         elif nivel == "1" and respuesta.lower() != "mezcla" and isinstance(final, float) == True:
             
@@ -234,17 +257,16 @@ def cuarta_pregunta(nivel, diario):
         elif nivel == "1" and respuesta.lower() == "mezcla" and isinstance(final, float) == True:
             print(felicidades)
             valor_respuesta = True
-#______________________Aqui vamos con las preguntas_____________________________#  
 
-        elif nivel == "2" and respuesta.lower() == 38 and isinstance(final, float) == True:
+        elif nivel == "2" and final == 20 and isinstance(final, float) == True:
             print(felicidades)
             valor_respuesta = True
 
-        elif nivel == "2" and respuesta.lower() != 38 and isinstance(final, float) == True:
+        elif nivel == "2" and final != 20 and isinstance(final, float) == True:
             print(advertencia)
         
             
-    patron_usuario = definir_patron(nivel)
+    patron_usuario = definir_patron(nivel, puerta)
    
     diario = agregar_a_diario(patron_usuario, diario)
     
@@ -252,14 +274,15 @@ def cuarta_pregunta(nivel, diario):
 
     return final, diario
 
-def quinta_pregunta(nivel, diario):
+#______________________Aqui vamos con las preguntas_____________________________#  
+def quinta_pregunta(nivel, diario, puerta):
     valor_respuesta = False
     advertencia = "Lamento decirlo, pero estas equivocado."
     felicidades = "Lo haz hecho bien, supongo."
 
     while valor_respuesta == False:
         msg_facil = "Un arbol crece de tal manera que dobla su altura todos los años. Cuando alcanza los 100 pies, el arbol tiene 38 años. Que edad tenia el arbol cuando media 50 pies? \n"
-        msg_dificil ="Cuanto es 10 + 10\n"
+        msg_dificil ="En una carrera entre un conejo y un canguro, donde el conejo le lleva la delantera al canguro\n"
         
         if nivel == "1":
             respuesta = input(msg_facil)
@@ -289,14 +312,14 @@ def quinta_pregunta(nivel, diario):
             print(advertencia)
         
             
-    patron_usuario = definir_patron(nivel)
+    patron_usuario = definir_patron(nivel, puerta)
    
     diario = agregar_a_diario(patron_usuario, diario)
     
     final = False
 
     return final, diario
-
+#-------------------Lista la 6_---------------------
 def sexta_pregunta(nivel, diario):
     valor_respuesta = False
     advertencia = "Piensalo bien."
@@ -304,7 +327,7 @@ def sexta_pregunta(nivel, diario):
 
     while valor_respuesta == False:
         msg_facil = "Seis maquinas pueden hacer 6 ruedas en seis minutos. Cuanto minutos les tomara a 30 maquinas hacer 30 ruedas?\n"
-        msg_dificil ="Cuanto es 10 + 10\n"
+        msg_dificil ="Dos trenes van por la misma via pero en direcciones opuestas. Si uno de los trenes va a 120 km y el otro a 180 km/h. Si estan a 60 km el uno del otro, a cuantos kilometros de distancia estaran un minuto antes de chocar \n"
         
         if nivel == "1":
             respuesta = input(msg_facil)
@@ -326,15 +349,15 @@ def sexta_pregunta(nivel, diario):
             print(felicidades)
             valor_respuesta = True
 
-        elif nivel == "2" and final == 38 and isinstance(final, float) == True:
+        elif nivel == "2" and final == 5 and isinstance(final, float) == True:
             print(felicidades)
             valor_respuesta = True
 
-        elif nivel == "2" and final != 38 and isinstance(final, float) == True:
+        elif nivel == "2" and final != 5 and isinstance(final, float) == True:
             print(advertencia)
         
             
-    patron_usuario = definir_patron(nivel)
+    patron_usuario = definir_patron(nivel,puerta)
    
     diario = agregar_a_diario(patron_usuario, diario)
     
@@ -342,9 +365,12 @@ def sexta_pregunta(nivel, diario):
 
     return final, diario
 
-def puerta_final(nivel, diario):
-    pass
+def puerta_final(nivel, diario, puerta):
 
+    print("Lo haz hecho bien hasta ahora, y haz llegado al desafio final. Debes encontrar el patron en los numeros dados. Te dare dos numeros, y tendras que ingresar el siguiente de acuerdo al patron.")
+    mostrar_diario(diario)
+    definir_patron(nivel, puerta)
+    
         
 
 
@@ -358,7 +384,7 @@ def main():
 
 
 
-    nombre_juego = "Escape del bosque"
+    nombre_juego = "Escape de la mazmorra"
     inicio = "Haz quedado atrapado dentro de una mazmorra, pero no te preocupes, porque hay una manera de salir. Si resuelves todos los acertijos que te realizare y encuentras el patron, entonces podras salir de este lugar.\n" 
    
 
@@ -374,34 +400,35 @@ def main():
     
     print(f"Hola {jugador}")
     
-
     time.sleep(0.5)
     
     while final == False:
+        puerta = False
         nivel = input("En que nivel deseas jugar(Ingresa el numero con tu alternativa.)\n1. Facil\n2. Dificil\n")
         
         time.sleep(1)
         if nivel == "1" or nivel == "2":
             print(inicio)
-            final, diario = primera_pregunta(nivel, diario)
+            final, diario = primera_pregunta(nivel, diario, puerta)
             if final == True:
                 break
-            final, diario = segunda_pregunta(nivel, diario)
+            final, diario = segunda_pregunta(nivel, diario, puerta)
             if final == True:
                 break
-            final, diario = tercera_pregunta(nivel, diario)
+            final, diario = tercera_pregunta(nivel, diario, puerta)
             if final == True:
                 break
-            # final, diario = cuarta_pregunta(nivel, diario)
-            # if final == True:
-            #     break
-            # final, diario = quinta_pregunta(nivel, diario)
-            # if final == True:
-            #     break
-            # final, diario = sexta_pregunta(nivel, diario)
-            # if final == True:
-            #     break
-
+            final, diario = cuarta_pregunta(nivel, diario, puerta)
+            if final == True:
+                break
+            final, diario = quinta_pregunta(nivel, diario, puerta)
+            if final == True:
+                break
+            final, diario = sexta_pregunta(nivel, diario,  puerta)
+            if final == True:
+                break
+            puerta = True
+            puerta_final(nivel, diario, puerta)
             print("Gracias por jugar")
 
             respuesta = input("Deseas otra partida?(si/no)")
