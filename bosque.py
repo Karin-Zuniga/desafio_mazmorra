@@ -1,6 +1,8 @@
 import time
 import random
 
+#-------------Patron------------#
+
 def mostrar_patron(patron):
     print("************")
     patron_usuario = "" 
@@ -45,26 +47,14 @@ def definir_patron(nivel, puerta):
             ingreso = input("Que numero sigue?\n")
             ingreso = transformar_a_numero(ingreso, advertencia)
             if ingreso == patron[2]:
-                print("Felicidades, lo lograste!")
+                print("Felicidades, lograste completar este nivel")
                 break
             else:
-                print(f"Lo siento, no es la respuesta que buscaba. Te quedan {i-1} intentos.")
-        print("Me temo haz perdido, mejor suerte para la proxima.")
+                print(f"No es la respuesta correcta. Solo te quedan {i-1} intentos.")
+        print("Game over, mejor suerte para la proxima.")
 
-def transformar_a_numero(respuesta, advertencia):
-
-    if respuesta == "salir":
-        final = True
-        return final
-    else:
-        try:
-            respuesta = float(respuesta)
-            if respuesta == 1:
-                print(advertencia)
-            else:
-                return respuesta
-        except ValueError:       
-            print("valor no valido")
+#--------------Fin Patron ----------#
+#----------Diario-------------#
 
 def agregar_a_diario(patron_usuario, diario):
     terminar = False
@@ -90,6 +80,29 @@ def mostrar_diario(diario):
             break
         else:
             continue
+
+#----------Fin Diario --------------#
+
+#--------------complemento pregunta --------------#
+
+def transformar_a_numero(respuesta, advertencia):
+
+    if respuesta == "salir":
+        final = True
+        return final
+    else:
+        try:
+            respuesta = float(respuesta)
+            if respuesta == 1:
+                print(advertencia)
+            else:
+                return respuesta
+        except ValueError:       
+            print("valor no valido")
+
+#---------Fin complemento pregunta ---------------#
+
+#----------Preguntas-----------------#
 
 def primera_pregunta(nivel, diario, puerta):
     
@@ -140,7 +153,7 @@ def primera_pregunta(nivel, diario, puerta):
 def segunda_pregunta(nivel, diario, puerta):
     valor_respuesta = False
     advertencia = "Vas por mal camino, sigue asi y te quedaras dentro.\n"
-    felicidades = "Sigue asi y puede que logres salir\n"
+    felicidades = "Sigue asi y puede que logres marcharte de este lugar\n"
 
     while valor_respuesta == False:
         msg_facil = "Si la mitad de 6.446 es 3.223 y la mitad de 6.612 es 3306, cuanto es la mitad de 88.442.288?(escribe la respuesta sin puntos)\n"
@@ -175,7 +188,7 @@ def segunda_pregunta(nivel, diario, puerta):
             valor_respuesta = True
 
         else:
-            print("algo salio mal")
+            print("oh no, creo que ingresaste algo mal")
 
     patron_usuario = definir_patron(nivel, puerta)
     
@@ -188,7 +201,7 @@ def segunda_pregunta(nivel, diario, puerta):
 def tercera_pregunta(nivel, diario, puerta):
     valor_respuesta = False
     advertencia = "Lamento decirlo, pero estas equivocado."
-    felicidades = "Lo haz hecho bien, supongo."
+    felicidades = "Lo haz hecho bien hasta el momento...supongo."
 
     while valor_respuesta == False:
         msg_facil = "Si tengo 22 años, en 27 años tendre 49. Si pasan 16 años mas,tendre 55. En cuantos años tendre 60?\n"
@@ -232,12 +245,12 @@ def tercera_pregunta(nivel, diario, puerta):
 
 def cuarta_pregunta(nivel, diario, puerta):
     valor_respuesta = False
-    advertencia = "De hecho, eso no es correcto."
-    felicidades = "Debo reconocer que lo haz hecho decentemente hasta aqui."
+    advertencia = "De hecho, esa no es la respuesta."
+    felicidades = "Debo reconocer que lo haz hecho decentemente hasta aqui, aunque el ultimo igual llego a donde estas ahora..."
 
     while valor_respuesta == False:
         msg_facil = "Tienes tres cajas de frutas. Naranjas, Manzanas y Mezcla. Las tres incorrectamente etiquetadas y solo puedes tomar una fruta de una de las cajas para etiquetarlas correctamente. Que caja escojerias?\n"
-        msg_dificil ="Sin un par de adultos se come un pollo entero en 10 minutos, cuantas personas harian falta para comer 10 pollos en 20 minutos.\n"
+        msg_dificil ="Si un par de adultos se come un pollo entero en 10 minutos, cuantas personas harian falta para comer 10 pollos en 20 minutos.\n"
         
         if nivel == "1":
             respuesta = input(msg_facil)
@@ -250,11 +263,11 @@ def cuarta_pregunta(nivel, diario, puerta):
         if isinstance(respuesta, float) == True:
             final = transformar_a_numero(respuesta, advertencia)
 
-        elif nivel == "1" and respuesta.lower() != "mezcla" and isinstance(final, float) == True:
+        elif nivel == "1" and respuesta.lower() != "mezcla":
             
             print(advertencia)
             
-        elif nivel == "1" and respuesta.lower() == "mezcla" and isinstance(final, float) == True:
+        elif nivel == "1" and respuesta.lower() == "mezcla":
             print(felicidades)
             valor_respuesta = True
 
@@ -273,12 +286,11 @@ def cuarta_pregunta(nivel, diario, puerta):
     final = False
 
     return final, diario
-
-#______________________Aqui vamos con las preguntas_____________________________#  
+ 
 def quinta_pregunta(nivel, diario, puerta):
     valor_respuesta = False
-    advertencia = "Lamento decirlo, pero estas equivocado."
-    felicidades = "Lo haz hecho bien, supongo."
+    advertencia = "Lamento decirlo, pero tu respuesta es incorrecta..."
+    felicidades = "Lo haz hecho bien... supongo."
 
     while valor_respuesta == False:
         msg_facil = "Un arbol crece de tal manera que dobla su altura todos los años. Cuando alcanza los 100 pies, el arbol tiene 38 años. Que edad tenia el arbol cuando media 50 pies? \n"
@@ -319,11 +331,11 @@ def quinta_pregunta(nivel, diario, puerta):
     final = False
 
     return final, diario
-#-------------------Lista la 6_---------------------
-def sexta_pregunta(nivel, diario):
+
+def sexta_pregunta(nivel, diario, puerta):
     valor_respuesta = False
-    advertencia = "Piensalo bien."
-    felicidades = "Supongo que no puedo negar que mereces cierto reconocimiento. Felicidades."
+    advertencia = "yo que tu lo pienso mejor, si realmente quieres salir de este lugar..."
+    felicidades = "no puedo evitar felicitarte, superaste al jugador que más pudo avanzar.. Felicidades."
 
     while valor_respuesta == False:
         msg_facil = "Seis maquinas pueden hacer 6 ruedas en seis minutos. Cuanto minutos les tomara a 30 maquinas hacer 30 ruedas?\n"
@@ -355,8 +367,7 @@ def sexta_pregunta(nivel, diario):
 
         elif nivel == "2" and final != 5 and isinstance(final, float) == True:
             print(advertencia)
-        
-            
+              
     patron_usuario = definir_patron(nivel,puerta)
    
     diario = agregar_a_diario(patron_usuario, diario)
@@ -365,89 +376,74 @@ def sexta_pregunta(nivel, diario):
 
     return final, diario
 
+#----------------------------fin preguntas----------------------
+#----------------------------desafio final--------------------
+
 def puerta_final(nivel, diario, puerta):
 
-    print("Lo haz hecho bien hasta ahora, y haz llegado al desafio final. Debes encontrar el patron en los numeros dados. Te dare dos numeros, y tendras que ingresar el siguiente de acuerdo al patron.")
+    print("Lo haz hecho bien, tanto asi que finalmente haz llegado al desafio final. ahora para salir debes encontrar el patron en los numeros dados. Te dare dos numeros, y tendras que este en la siguiente pregunta de acuerdo al patron.")
     mostrar_diario(diario)
     definir_patron(nivel, puerta)
-    
-        
+#-------------------------fin desafio final--------------------
+#------------------------fin funciones juego-----------------
 
-
-
-
-
-
-
+    #---------------Funcion main----------------
 def main():
-
-
-
-
     nombre_juego = "Escape de la mazmorra"
     inicio = "Haz quedado atrapado dentro de una mazmorra, pero no te preocupes, porque hay una manera de salir. Si resuelves todos los acertijos que te realizare y encuentras el patron, entonces podras salir de este lugar.\n" 
-   
+    
 
     final = False
     diario = []
     print(f"Bienvenido a {nombre_juego}\n")
-    
+        
     time.sleep(0.5)
-    
-    jugador = input(f"Cual es tu nombre?\n")
-    
+        
+    jugador = input(f"Cual seria tu nombre jugador n*300?\n")
+        
     time.sleep(0.5)
-    
+        
     print(f"Hola {jugador}")
-    
+        
     time.sleep(0.5)
-    
+        
     while final == False:
-        puerta = False
-        nivel = input("En que nivel deseas jugar(Ingresa el numero con tu alternativa.)\n1. Facil\n2. Dificil\n")
-        
-        time.sleep(1)
-        if nivel == "1" or nivel == "2":
-            print(inicio)
-            final, diario = primera_pregunta(nivel, diario, puerta)
-            if final == True:
-                break
-            final, diario = segunda_pregunta(nivel, diario, puerta)
-            if final == True:
-                break
-            final, diario = tercera_pregunta(nivel, diario, puerta)
-            if final == True:
-                break
-            final, diario = cuarta_pregunta(nivel, diario, puerta)
-            if final == True:
-                break
-            final, diario = quinta_pregunta(nivel, diario, puerta)
-            if final == True:
-                break
-            final, diario = sexta_pregunta(nivel, diario,  puerta)
-            if final == True:
-                break
-            puerta = True
-            puerta_final(nivel, diario, puerta)
-            print("Gracias por jugar")
+            puerta = False
+            nivel = input("En que nivel deseas jugar(Ingresa el numero con tu alternativa.)\n1. Facil\n2. Dificil\n")
+            
+            time.sleep(1)
+            if nivel == "1" or nivel == "2":
+                print(inicio)
+                final, diario = primera_pregunta(nivel, diario, puerta)
+                if final == True:
+                    break
+                final, diario = segunda_pregunta(nivel, diario, puerta)
+                if final == True:
+                    break
+                final, diario = tercera_pregunta(nivel, diario, puerta)
+                if final == True:
+                    break
+                final, diario = cuarta_pregunta(nivel, diario, puerta)
+                if final == True:
+                    break
+                final, diario = quinta_pregunta(nivel, diario, puerta)
+                if final == True:
+                    break
+                final, diario = sexta_pregunta(nivel, diario,  puerta)
+                if final == True:
+                    break
+                puerta = True
+                puerta_final(nivel, diario, puerta)
+                print("Gracias por jugar con nosotros")
 
-            respuesta = input("Deseas otra partida?(si/no)")
-            if respuesta == "no":
-                final = True
+                respuesta = input("Deseas otra partida?(si/no)")
+                if respuesta == "no":
+                    final = True
+                else:
+                    final = False
+
             else:
-                final = False
-
-        else:
-            print("valor no valido")    
-        
-        
-
-
-
-
-       
-
-
-    
-
+                print("valor no valido")    
+            
+        #---------------------Fin funcion main----------------
 main()
